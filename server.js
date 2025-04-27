@@ -5,7 +5,7 @@ const User = require('./models/User');
 const bodyParser = require('body-parser');
 const authRoutes = require('./routes/auth');
 const mongoose = require('mongoose');
-
+const profileRoutes = require('./routes/profileRoutes')
 require('dotenv').config();
 
 
@@ -23,6 +23,9 @@ app.use('/api/auth', authRoutes);
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
+
+// Start to use routes
+app.use('/api/user', profileRoutes);
 
 // Endpoint for User Creation
 app.post('/api/users', async(req, res) => {
